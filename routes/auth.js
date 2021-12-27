@@ -2,6 +2,7 @@ import express from "express";
 import { default as User } from "../models/User.js";
 import CryptoJS from "crypto-js";
 import dotenv from "dotenv";
+import Jwt from "jsonwebtoken";
 const router = express.Router();
 
 router.post("/register", async (req, res) => {
@@ -45,9 +46,14 @@ router.post("/login", async (req, res) => {
     if (passwordO !== req.body.password) {
       res.status(401).json("wrong email or password2");
     }
+    const accessToken = Jwt.sign(
+      { id: user._id, isAdmin: user.isAdmin },
+      process.env.JWT_SEC,
+      { expiresIn: "3d" }
+    );
     const { password, ...others } = user._doc;
 
-    res.status(200).json(others);
+    res.status(200).json({ ...others, accessToken });
   } catch (err) {
     res.status(500).json(err);
   }
