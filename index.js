@@ -6,6 +6,7 @@ import { default as authRoute } from "./routes/auth.js";
 import { default as productRoute } from "./routes/product.js";
 import { default as cartRoute } from "./routes/cart.js";
 import { default as orderRoute } from "./routes/order.js";
+import { default as stripeRoute } from "./routes/stripe.js";
 dotenv.config();
 const app = express();
 //check
@@ -22,6 +23,7 @@ app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
 app.use("/api/carts", cartRoute);
 app.use("/api/orders", orderRoute);
+app.use("/api/payments", stripeRoute);
 app.listen(process.env.PORT || 8080, () => {
   console.log("backend server running!");
 });
