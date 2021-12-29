@@ -17,6 +17,10 @@ try {
 } catch (error) {
   console.log(error);
 }
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
 app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
@@ -24,6 +28,6 @@ app.use("/api/products", productRoute);
 app.use("/api/carts", cartRoute);
 app.use("/api/orders", orderRoute);
 app.use("/api/payments", stripeRoute);
-app.listen(process.env.PORT || 8080, () => {
+app.listen(8080, () => {
   console.log("backend server running!");
 });
