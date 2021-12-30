@@ -1,8 +1,9 @@
 import express from "express";
 import Stripe from "stripe";
+import dotenv from "dotenv";
+dotenv.config();
 const router = express.Router();
 const stripe = Stripe(process.env.STRIPE_KEY);
-
 router.post("/payment", (req, res) => {
   stripe.charges.create(
     {
@@ -13,8 +14,10 @@ router.post("/payment", (req, res) => {
     (stripeErr, stripeRes) => {
       if (stripeErr) {
         res.status(500).json(stripeErr);
+        console.log(stripeErr);
       } else {
         res.status(200).json(stripeRes);
+        console.log(res);
       }
     }
   );
