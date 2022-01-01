@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { default as userRoute } from "./routes/user.js";
 import { default as authRoute } from "./routes/auth.js";
 import { default as productRoute } from "./routes/product.js";
+import { default as categoryRoute } from "./routes/category.js";
 import { default as cartRoute } from "./routes/cart.js";
 import { default as orderRoute } from "./routes/order.js";
 import { default as stripeRoute } from "./routes/stripe.js";
@@ -29,6 +30,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
+app.use("/api/categories", categoryRoute);
 app.use("/api/products", productRoute);
 app.use("/api/carts", cartRoute);
 app.use("/api/orders", orderRoute);
