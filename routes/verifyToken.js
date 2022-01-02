@@ -2,6 +2,7 @@ import Jwt from "jsonwebtoken";
 
 export const verifyToken = (req, res, next) => {
   const authHeader = req.headers.token;
+  console.log(authHeader);
   if (authHeader) {
     const token = authHeader.split(" ")[1];
 
@@ -27,6 +28,7 @@ export const verifyTokenAndAuthorize = (req, res, next) => {
 
 export const verifyTokenAndAdmin = (req, res, next) => {
   verifyToken(req, res, () => {
+    console.log(req);
     if (req.user.isAdmin) {
       next();
     } else {
