@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import CategoriesItem from "./CategoriesItem";
 import { mobile } from "../responsive";
 import axios from "axios";
+import { axiosInstance } from "../config";
 const Container = styled.div`
   display: flex;
   padding: 20px;
@@ -16,7 +17,7 @@ const Categories = () => {
   useEffect(() => {
     const getCategories = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/categories");
+        const res = await axiosInstance.get("/categories");
         console.log(res);
         setCategories(res.data);
       } catch (err) {}
